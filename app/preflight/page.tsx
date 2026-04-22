@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
+import { isOfflineMode, offlineReason, type OfflineReason } from '@/lib/config/demo-mode';
 import { TrafficLight } from '@/lib/components/TrafficLight';
 import { pingAnthropic, pingOpenAI, type PingResult } from '@/lib/preflight/ping';
 
@@ -30,6 +31,8 @@ function labelFor(state: ServiceState): string {
 
 export default function PreflightPage() {
   const router = useRouter();
+  const [offline] = useState<boolean>(() => isOfflineMode());
+  const [reason] = useState(() => offlineReason());
   const [anthropic, setAnthropic] = useState<ServiceState>(INITIAL);
   const [openai, setOpenai] = useState<ServiceState>(INITIAL);
 
@@ -61,12 +64,13 @@ export default function PreflightPage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    if (offline) return; // skip pings entirely in offline mode
     const controller = new AbortController();
     void runChecks(controller.signal);
     return () => controller.abort();
-  }, [runChecks]);
+  }, [runChecks, offline]);
 
-  const canEnter = anthropic.status === 'ok';
+  const canEnter = offline || anthropic.status === 'ok';
 
   return (
     <div
@@ -85,25 +89,34 @@ export default function PreflightPage() {
       >
         <div className="card-h">
           <div className="t">
-            Pre-flight check <em>— connectivity</em>
+            Pre-flight check{' '}
+            <em>{offline ? '— offline demo mode' : '— connectivity'}</em>
           </div>
-          <button type="button" className="btn sm" onClick={() => void runChecks()}>
-            Recheck
-          </button>
+          {offline ? null : (
+            <button type="button" className="btn sm" onClick={() => void runChecks()}>
+              Recheck
+            </button>
+          )}
         </div>
         <div className="card-b" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <Row
-            name="Anthropic · Claude streaming"
-            subtitle="Recall, Override, Tone Guard"
-            state={anthropic}
-            color={colorFor('anthropic', anthropic)}
-          />
-          <Row
-            name="OpenAI · embeddings"
-            subtitle="Free-text Recall fallback only (D4)"
-            state={openai}
-            color={colorFor('openai', openai)}
-          />
+          {offline ? (
+            <OfflineRow reason={reason} />
+          ) : (
+            <>
+              <Row
+                name="Anthropic · Claude streaming"
+                subtitle="Recall, Override, Tone Guard"
+                state={anthropic}
+                color={colorFor('anthropic', anthropic)}
+              />
+              <Row
+                name="OpenAI · embeddings"
+                subtitle="Free-text Recall fallback only (D4)"
+                state={openai}
+                color={colorFor('openai', openai)}
+              />
+            </>
+          )}
           <div
             style={{
               borderTop: '1px solid var(--rule-2)',
@@ -114,9 +127,11 @@ export default function PreflightPage() {
             }}
           >
             <div className="foot">
-              {canEnter
-                ? 'Anthropic online. OK to enter demo.'
-                : 'Anthropic must be green to enter.'}
+              {offline
+                ? 'Offline mode · fixtures only. Add API keys to .env.local for live LLM.'
+                : canEnter
+                  ? 'Anthropic online. OK to enter demo.'
+                  : 'Anthropic must be green to enter.'}
             </div>
             <button
               type="button"
@@ -128,6 +143,59 @@ export default function PreflightPage() {
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function OfflineRow({ reason }: { reason: OfflineReason }) {
+  const subtitle =
+    reason === 'explicit'
+      ? 'NEXT_PUBLIC_DEMO_MODE=offline is set — live LLM disabled.'
+      : reason === 'missing-anthropic'
+        ? 'ANTHROPIC_API_KEY missing — live LLM disabled.'
+        : reason === 'missing-openai'
+          ? 'OPENAI_API_KEY missing — live LLM disabled.'
+          : 'Both API keys missing — live LLM disabled.';
+  return (
+    <div
+      data-testid="offline-row"
+      style={{ display: 'flex', alignItems: 'center', gap: 16 }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          width: 18,
+          height: 18,
+          borderRadius: '50%',
+          background: 'var(--rule-2)',
+          flexShrink: 0,
+        }}
+      />
+      <div style={{ flex: 1 }}>
+        <div
+          style={{
+            fontFamily: 'var(--sans)',
+            fontSize: 13,
+            color: 'var(--navy)',
+            fontWeight: 500,
+          }}
+        >
+          Offline demo mode
+        </div>
+        <div style={{ fontFamily: 'var(--mono)', fontSize: 10.5, color: 'var(--slate)' }}>
+          {subtitle}
+        </div>
+      </div>
+      <div
+        style={{
+          fontFamily: 'var(--mono)',
+          fontSize: 10.5,
+          color: 'var(--slate)',
+          textAlign: 'right',
+        }}
+      >
+        fixtures only
       </div>
     </div>
   );

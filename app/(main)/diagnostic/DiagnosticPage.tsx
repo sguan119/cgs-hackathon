@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ToastRail } from '@/app/(floating)/recall-panel/ToastRail';
+import { ApiRequiredNotice } from '@/lib/components/ApiRequiredNotice';
 import { ErrorBoundary } from '@/lib/components/ErrorBoundary';
 import { SupersededCard } from '@/lib/components/SupersededCard';
+import { canUseClaude, isOfflineMode } from '@/lib/config/demo-mode';
 import { findDim, type InertiaHypothesis, type StrategyDimensionId } from '@/lib/override/dims';
 import { get } from '@/lib/store';
 import initialHypothesesFixture from '../../../fixtures/diagnostic_fixtures/initial_hypotheses.json';
@@ -51,6 +53,11 @@ export function DiagnosticPage() {
       }
       await setScore(dim, next);
       setEditingDim(null);
+      // Offline guard: the score change itself is local state, but
+      // the Claude-driven hypothesis re-compute needs API. Skip the
+      // dispatch in offline mode; the block-level notice near the
+      // wheel tells the user what's missing.
+      if (!canUseClaude()) return;
       session.dispatch({ dimension: dim, prevScore: prev, nextScore: next });
     },
     [scores, setScore, session]
@@ -144,6 +151,9 @@ export function DiagnosticPage() {
         <div className="grid doc-grid" style={{ marginBottom: 24 }}>
           <DiagnosticDocs />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+            {isOfflineMode() && !canUseClaude() ? (
+              <ApiRequiredNotice service="anthropic" size="block" />
+            ) : null}
             <div className="card">
               <div className="card-h">
                 <div className="t">Strategy Wheel</div>

@@ -7,6 +7,8 @@ import {
   useRef,
   useState,
 } from 'react';
+import { ApiRequiredNotice } from '@/lib/components/ApiRequiredNotice';
+import { canUseClaude, canUseOpenAIEmbed, isOfflineMode } from '@/lib/config/demo-mode';
 import type { ScriptedQuery } from '@/lib/retrieval/fixture-types';
 import { AutocompleteList } from './AutocompleteList';
 import { useAutocomplete } from './hooks/useAutocomplete';
@@ -29,6 +31,13 @@ export function QueryInput({ disabled, onSubmit, focusSignal }: Props) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const auto = useAutocomplete(dropdownOpen ? value : '');
   const listboxId = useId();
+  // Offline-mode gate: both scripted-with-empty-embedding and free-text
+  // submissions end up needing OpenAI (embed) and Anthropic (stream),
+  // so block any submit when either is unavailable. The textarea stays
+  // interactive — user can still see autocomplete preview — but the
+  // inline notice explains why nothing happens on Enter.
+  const blocked = !canUseClaude() || !canUseOpenAIEmbed();
+  const offline = isOfflineMode();
 
   useEffect(() => {
     if (focusSignal === undefined) return;
@@ -59,6 +68,7 @@ export function QueryInput({ disabled, onSubmit, focusSignal }: Props) {
   function submit(scripted?: ScriptedQuery): void {
     const q = value.trim();
     if (q.length === 0) return;
+    if (blocked) return; // inline notice below the textarea explains why
     if (scripted) {
       onSubmit({ query: scripted.query, source: 'scripted', scriptedId: scripted.id });
     } else {
@@ -112,9 +122,13 @@ export function QueryInput({ disabled, onSubmit, focusSignal }: Props) {
       <textarea
         ref={textareaRef}
         className="recall-query-input"
-        placeholder="Ask recall — cmd-K from anywhere"
+        placeholder={
+          blocked
+            ? 'Recall requires API keys — see notice below.'
+            : 'Ask recall — cmd-K from anywhere'
+        }
         value={value}
-        disabled={disabled}
+        disabled={disabled || blocked}
         onChange={(e) => {
           setValue(e.target.value);
           setDropdownOpen(true);
@@ -124,6 +138,18 @@ export function QueryInput({ disabled, onSubmit, focusSignal }: Props) {
         aria-label="Recall query"
         aria-controls={listboxId}
       />
+      {blocked && offline ? (
+        <ApiRequiredNotice
+          service={
+            !canUseClaude() && !canUseOpenAIEmbed()
+              ? 'both'
+              : !canUseClaude()
+                ? 'anthropic'
+                : 'openai'
+          }
+          size="inline"
+        />
+      ) : null}
       {dropdownOpen && auto.items.length > 0 ? (
         <div id={listboxId}>
           <AutocompleteList

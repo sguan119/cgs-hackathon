@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
+import { canUseClaude, canUseOpenAIEmbed } from '@/lib/config/demo-mode';
 import { EVENTS, emit } from '@/lib/events';
 import type { FollowupTurn } from '@/lib/llm/followup';
 import { runRecallTurn, type RecallChainSource } from '@/lib/llm/recall-chain';
@@ -88,6 +89,28 @@ export function useRecallSession() {
 
   const submit = useCallback(
     async (args: { query: string; source: 'scripted' | 'free-text'; scriptedId?: string }) => {
+      // Offline guard. QueryInput already no-ops submits when keys are
+      // missing; this is defense-in-depth for non-UI callers (tests,
+      // future programmatic triggers). Surface the reason as a failed
+      // turn so the absence of a card is visible, not silent.
+      if (!canUseClaude() || !canUseOpenAIEmbed()) {
+        const failId = newId();
+        setTurns((cur) => [
+          ...cur,
+          {
+            id: failId,
+            query: args.query,
+            status: 'failed',
+            latencyMs: null,
+            source: args.source,
+            path: null,
+            card: emptyCard(),
+            precedentId: null,
+            error: 'api-required',
+          },
+        ]);
+        return;
+      }
       // Served-from-cache turns are semantically complete for follow-up
       // context purposes (reviewer N1) — the card shape is identical.
       const priorTurns = turns

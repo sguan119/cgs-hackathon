@@ -54,6 +54,33 @@ Web-only (no native shell, useful for quick UI checks without Rust):
 pnpm dev:web                         # Next.js on :3000 in a browser tab
 ```
 
+## Offline demo mode
+
+The app auto-enables **offline mode** when either API key in `.env.local`
+is missing, empty, or still the `REPLACE_ME` placeholder. In that state:
+
+- `/preflight` skips the Anthropic + OpenAI pings and shows a neutral
+  "Offline demo mode" row. **Enter demo** is enabled immediately.
+- Recall panel — textarea is disabled with an inline notice
+  *"Requires ANTHROPIC_API_KEY + OPENAI_API_KEY — add to .env.local and
+  restart."* Scripted autocomplete preview still renders when you click
+  in; submissions are blocked until keys land.
+- Diagnostic (Strategy Wheel) — a block-level notice sits above the
+  wheel. Clicking sectors opens the ScoreEditor for inspection but
+  committing a new score is a no-op.
+- Tone Guard, Dashboard, Data Hub, Continuity exemplars, Meeting page —
+  **fully functional** (pure fixture / local validator).
+
+Fill real `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` in `.env.local` and
+restart to re-enable live LLM. To force the offline UI while keys are
+present (e.g. for testing the gates), set
+`NEXT_PUBLIC_DEMO_MODE=offline`.
+
+Note: the `offline_cache.json` and `override_cache.json` fixtures are
+currently skeletal. Even with real keys filled, Recall and Override
+only light up once you also complete the content-prep steps below and
+run `pnpm gen:all`.
+
 ## Test
 
 ```bash
