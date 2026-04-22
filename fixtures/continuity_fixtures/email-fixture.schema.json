@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGS Advisors Continuity Email Fixture",
+  "description": "Schema for fixtures/continuity_fixtures/{pass,borderline,high-risk}.json (Phase 2C §3.2). Skeleton bodies ship with engineering; content owner fills real Acme content per impl-plan §3.A.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "to", "subject", "body", "expected_verdict"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "enum": ["pass", "borderline", "high-risk"]
+    },
+    "to": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_verdict": {
+      "type": "string",
+      "enum": ["pass", "borderline", "high-risk"]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

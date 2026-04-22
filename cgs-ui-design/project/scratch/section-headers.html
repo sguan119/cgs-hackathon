@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Section header preview</title>
+  <link rel="stylesheet" href="../styles.css"/>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    html, body { margin: 0; background: #EFE9D9; min-height: 100vh; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="../design-canvas.jsx"></script>
+<script type="text/babel">
+function Demo() {
+  return (
+    <div style={{paddingTop: 40}}>
+      <DCSection
+        title="Part 1 · S2 Diagnostic Agent"
+        subtitle="Machine executes CGS method — Strategy Wheel scoring, Inertia hypotheses, intervention library. Fellow judges.">
+        <div style={{height: 40}}/>
+      </DCSection>
+
+      <DCSection
+        title="Part 3 · S3 Layer 2 · Real-Time Recall  ·  DEMO HERO (60%)"
+        subtitle="Two surfaces: (1) a Workbench page where the Fellow monitors recall health + history, (2) an always-on overlay summoned with ⌘K that floats on top of Zoom / Docs / deck review. Client-invisible.">
+        <DCArtboard label="F-dash · Workbench console · pre-meeting readiness + recent-calls log" width={400} height={200}>
+          <div style={{padding: 20}}>artboard</div>
+        </DCArtboard>
+        <DCArtboard label="F0 · ⌘K summon · moment of invocation" width={400} height={200}>
+          <div style={{padding: 20}}>artboard</div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        title="Part 4 · S3 Layer 3 · Compounding Loop"
+        subtitle="24h memo (client-facing), Thesis Memory diff (internal), Curated Backfill (system) — each meeting sharpens the next.">
+        <div style={{height: 40}}/>
+      </DCSection>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>

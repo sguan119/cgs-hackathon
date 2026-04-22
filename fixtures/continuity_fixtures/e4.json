@@ -1,0 +1,31 @@
+[
+  {
+    "id": "r1",
+    "from": "M. Halverson, CEO",
+    "subject": "Re: April check-in",
+    "body": "D. — The new COO is rethinking our innovation stack. Rita has taken over all Digital under her Ops remit. Not ready for a formal session yet, but noted.\n\nM.",
+    "extracted": {
+      "strategy_wheel_shifts": [
+        { "dim": "Strategic Innovation", "direction": "down" },
+        { "dim": "Strategy Governance", "direction": "flat" }
+      ],
+      "inertia_shift": "structural",
+      "external_coupling": null
+    },
+    "friction_type": "structural"
+  },
+  {
+    "id": "r2",
+    "from": "S. Lindqvist, CFO",
+    "subject": "Re: TO scope check",
+    "body": "D., I am supportive in principle but the timing is wrong given the capex re-price from Q1. Hold on a formal scope memo until after the Jul planning cycle.\n\nS.",
+    "extracted": {
+      "strategy_wheel_shifts": [
+        { "dim": "Strategic Transformation", "direction": "flat" }
+      ],
+      "inertia_shift": "dominant_logic",
+      "external_coupling": "Q1 tariff capex reprice"
+    },
+    "friction_type": "dominant_logic"
+  }
+]

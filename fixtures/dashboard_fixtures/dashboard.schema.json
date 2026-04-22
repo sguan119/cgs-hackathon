@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGS Advisors Dashboard Fixture",
+  "description": "Schema for fixtures/dashboard_fixtures/dashboard.json (Phase 4.1). Acme-locked skeletal fixture; content owner replaces bodies pre-demo per impl-plan §3.A.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["client", "stages", "timeline", "alerts", "externalSignals", "contextLoadSec"],
+  "properties": {
+    "client": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "industry", "retainer", "nextContact", "relationshipStage"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "industry": { "type": "string", "minLength": 1 },
+        "retainer": { "type": "string", "minLength": 1 },
+        "nextContact": { "type": "string", "minLength": 1 },
+        "relationshipStage": {
+          "type": "string",
+          "enum": ["Signal", "Pre-RFP", "Retainer", "Active Delivery", "Renewal"]
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Signal", "Pre-RFP", "Retainer", "Active Delivery", "Renewal"]
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "timeline": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "t", "kind", "label"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "t": { "type": "string", "minLength": 1 },
+          "kind": {
+            "type": "string",
+            "enum": ["meeting", "earnings", "email", "memo", "project", "signal"]
+          },
+          "label": { "type": "string", "minLength": 1 },
+          "sub": { "type": "string" },
+          "route": {
+            "type": "string",
+            "enum": ["recall", "diagnostic", "continuity", "meeting"]
+          }
+        }
+      }
+    },
+    "alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "severity", "text"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "retainer_renewal_risk",
+              "exec_email_overdue",
+              "pre_rfp_signal",
+              "prospect_cooling"
+            ]
+          },
+          "severity": { "type": "string", "enum": ["high", "borderline"] },
+          "text": { "type": "string", "minLength": 1 },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "externalSignals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "t", "headline", "relevance"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "t": { "type": "string", "minLength": 1 },
+          "headline": { "type": "string", "minLength": 1 },
+          "relevance": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "contextLoadSec": { "type": "integer", "minimum": 1 }
+  }
+}

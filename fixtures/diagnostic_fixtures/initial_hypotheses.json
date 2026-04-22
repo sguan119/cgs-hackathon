@@ -1,0 +1,13 @@
+[
+  {
+    "id": "sli-placeholder",
+    "kind": "structural",
+    "label": "Initial hypothesis placeholder — content owner fills in Phase 3.2.",
+    "statement": "Placeholder statement. Phase 2B ships an empty-ish skeleton; the Phase 3.2 content owner replaces this with the Acme baseline drawn from acme_fixtures/*.",
+    "confidence": 0.5,
+    "evidence": [
+      { "source_id": "placeholder-src", "quote": "placeholder evidence quote" }
+    ],
+    "intervention_ids": ["int-placeholder"]
+  }
+]

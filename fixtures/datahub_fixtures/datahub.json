@@ -1,0 +1,119 @@
+{
+  "uploads": [
+    {
+      "id": "u1",
+      "name": "CRM_export_Q2_2026.csv",
+      "size": "2.4 MB",
+      "rows": 84,
+      "status": "tagged"
+    },
+    {
+      "id": "u2",
+      "name": "Industry_report_Gartner.pdf",
+      "size": "11.8 MB",
+      "rows": 1,
+      "status": "tagging"
+    },
+    {
+      "id": "u3",
+      "name": "Prospect_list_Q2_2026.xlsx",
+      "size": "420 KB",
+      "rows": 37,
+      "status": "untagged"
+    }
+  ],
+  "crmRows": [
+    {
+      "id": "c1",
+      "name": "Acme Industrial",
+      "industry": "Diversified",
+      "size": "F500",
+      "region": "NA",
+      "serviceLine": "Strategic Transformation",
+      "stage": "Retainer",
+      "flag": null
+    },
+    {
+      "id": "c2",
+      "name": "Globex",
+      "industry": "Diversified",
+      "size": "F500",
+      "region": "NA",
+      "serviceLine": "IT Transformation",
+      "stage": "Renewal",
+      "flag": null
+    },
+    {
+      "id": "c3",
+      "name": "Initech Holdings",
+      "industry": "Financial Services",
+      "size": "F1000",
+      "region": "NA",
+      "serviceLine": "Inertia Removal",
+      "stage": "Active Delivery",
+      "flag": null
+    },
+    {
+      "id": "c4",
+      "name": "Umbrella Corp.",
+      "industry": "Healthcare",
+      "size": "F500",
+      "region": "EMEA",
+      "serviceLine": "Enterprise Innovation",
+      "stage": "Retainer",
+      "flag": null
+    },
+    {
+      "id": "c5",
+      "name": "Stark Industries",
+      "industry": "Aerospace",
+      "size": "F100",
+      "region": "NA",
+      "serviceLine": "Strategic Transformation",
+      "stage": "Pre-RFP",
+      "flag": "new"
+    },
+    {
+      "id": "c6",
+      "name": "Cyberdyne Ltd.",
+      "industry": "Technology",
+      "size": "F1000",
+      "region": "APAC",
+      "serviceLine": "IT Transformation",
+      "stage": "Signal",
+      "flag": "new"
+    }
+  ],
+  "acmeFolder": [
+    {
+      "icon": "M",
+      "name": "CEO Memo · Strategy to the Board",
+      "meta": "Mar 14, 2026 · 5 pp · M. Halverson"
+    },
+    {
+      "icon": "O",
+      "name": "Organization Structure · Q1 FY26",
+      "meta": "Mar 22, 2026 · org chart · v3"
+    },
+    {
+      "icon": "C",
+      "name": "Q3 FY25 Earnings Call · transcript",
+      "meta": "Apr 14, 2026 · 24 pp · ingested"
+    },
+    {
+      "icon": "N",
+      "name": "Bi-weekly notes · M1 · Apr 07",
+      "meta": "Apr 07, 2026 · 3 pp · D. Park"
+    },
+    {
+      "icon": "E",
+      "name": "Exec inbox thread · TO scope",
+      "meta": "Apr 11, 2026 · CFO Lindqvist · 8 msgs"
+    },
+    {
+      "icon": "+",
+      "name": "14 more files",
+      "meta": "decks · memos · financials · press"
+    }
+  ]
+}

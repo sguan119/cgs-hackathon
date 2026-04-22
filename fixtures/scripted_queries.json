@@ -1,0 +1,17 @@
+[
+  {
+    "id": "q-cdo-reporting-line",
+    "query": "what's the closest analogue to the CDO reporting-line issue",
+    "embedding": [],
+    "expected_precedent_ids": ["globex-2018-cdo"],
+    "category": "first-hit",
+    "notes": "Phase 2A skeleton — content owner fills embeddings via impl-plan §3.1 script."
+  },
+  {
+    "id": "q-followup-transition",
+    "query": "how long did that transition take and what broke",
+    "embedding": [],
+    "expected_precedent_ids": ["globex-2018-cdo"],
+    "category": "follow-up"
+  }
+]

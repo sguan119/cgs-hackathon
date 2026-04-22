@@ -1,0 +1,8 @@
+{
+  "id": "borderline",
+  "to": "D. Park <dpark@acme.example>",
+  "subject": "Acme · short check-in",
+  "body": "Hi D. —\n\nWhat We're Seeing\nThe Strategic Innovation pod is progressing steadily this week.\n\nQuick Pulse Check\nDominant Logic has not shifted yet; flagging rather than pushing.\n\nPreliminary Read\nHappy to follow up next week once the board materials are ready.",
+  "expected_verdict": "borderline",
+  "notes": "Skeleton — borderline soft sales hit (\"follow up\") with all three sections + canonical tags present. Plan §6.3 originally called for missing \"Quick Pulse Check\" too, but §4.1 makes missing_section high-severity; keeping headers intact is the only way to land a true borderline verdict. Content owner replaces with real Acme §2.8 body pre-demo."
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>CGS · audit each artboard</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body { background:#f0eee9; padding: 20px; margin: 0; }
+    .audit-frame {
+      width: 1440px; height: 900px;
+      background: #fff;
+      outline: 2px dashed #c44;
+      outline-offset: -1px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .audit-frame.tall { height: 1060px; }
+    .audit-frame.shortwide { height: 640px; }
+    .audit-frame.portrait { width: 820px; height: 1060px; }
+    .audit-label {
+      position: absolute; top: -22px; left: 0;
+      font: 12px 'IBM Plex Mono', monospace;
+      color: #c44;
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="fixtures.js"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="components/StrategyWheel.jsx"></script>
+<script type="text/babel" src="components/AppShell.jsx"></script>
+<script type="text/babel" src="components/DiagnosticPage.jsx"></script>
+<script type="text/babel" src="components/MeetingRecall.jsx"></script>
+<script type="text/babel" src="components/RecallSidebar.jsx"></script>
+<script type="text/babel" src="components/Exports.jsx"></script>
+
+<script type="text/babel">
+function A({label, w=1440, h=900, children}){
+  return (<div className="audit-frame" style={{width:w, height:h}}>
+    <div className="audit-label">{label} — {w}×{h}</div>
+    {children}
+  </div>);
+}
+function App(){
+  return (<div>
+    <A label="A · S2 landing">
+      <AppShell active="diagnostic"><DiagnosticPage wheelVariant="A" /></AppShell>
+    </A>
+    <A label="B · Wheel variant B">
+      <AppShell active="diagnostic"><DiagnosticPage wheelVariant="B" /></AppShell>
+    </A>
+    <A label="C · Override">
+      <AppShell active="diagnostic"><DiagnosticPage wheelVariant="A" overrideActive/></AppShell>
+    </A>
+    <A label="D · Pre-Read in app">
+      <AppShell active="preread"><PreReadPage/></AppShell>
+    </A>
+    <A label="E · Pre-Read doc" w={820} h={1060}>
+      <PreReadDocExport/>
+    </A>
+    <A label="F · Realtime 1st turn">
+      <MeetingLaptopView turnIdx={0}/>
+    </A>
+    <A label="G · Realtime 3 turns">
+      <MeetingLaptopView turnIdx={2}/>
+    </A>
+    <A label="H · No-anchor fallback">
+      <MeetingLaptopView turnIdx={2} showFallback/>
+    </A>
+    <A label="H2 · Collapsed rail">
+      <MeetingLaptopView turnIdx={1} collapsed/>
+    </A>
+    <A label="I · Post-meeting">
+      <AppShell active="post"><PostMeetingPage/></AppShell>
+    </A>
+    <A label="J · 24h Memo" w={820} h={1060}>
+      <MemoExport/>
+    </A>
+    <A label="K · Thesis full" h={640}>
+      <AppShell active="post" compact><ThesisFullPage/></AppShell>
+    </A>
+  </div>);
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+{
+  "client": {
+    "name": "Acme Industrial",
+    "industry": "Diversified · Multi-sector operations",
+    "retainer": "Active · Renewal window opens Jul 2026",
+    "nextContact": "Apr 21 · 10:30 — bi-weekly",
+    "relationshipStage": "Retainer"
+  },
+  "stages": ["Signal", "Pre-RFP", "Retainer", "Active Delivery", "Renewal"],
+  "timeline": [
+    {
+      "id": "t1",
+      "t": "Apr 19",
+      "kind": "meeting",
+      "label": "Bi-weekly · CEO + COO + CFO",
+      "sub": "Meeting recap · 12 anchors cited",
+      "route": "meeting"
+    },
+    {
+      "id": "t2",
+      "t": "Apr 14",
+      "kind": "earnings",
+      "label": "Q3 earnings call transcript ingested",
+      "sub": "3 inertia flags detected",
+      "route": "diagnostic"
+    },
+    {
+      "id": "t3",
+      "t": "Apr 09",
+      "kind": "email",
+      "label": "CEO Halverson → D. Park",
+      "sub": "Reply to April check-in · escalation signal",
+      "route": "continuity"
+    },
+    {
+      "id": "t4",
+      "t": "Mar 28",
+      "kind": "memo",
+      "label": "24h memo · Transformation Office",
+      "sub": "Sent · 2 responses",
+      "route": "diagnostic"
+    },
+    {
+      "id": "t5",
+      "t": "Mar 22",
+      "kind": "project",
+      "label": "Diagnostic run · Strategy Wheel v2",
+      "sub": "Fellow override on Strategic Innovation",
+      "route": "diagnostic"
+    },
+    {
+      "id": "t6",
+      "t": "Mar 10",
+      "kind": "signal",
+      "label": "New COO announcement · press release",
+      "sub": "Structural Friction detected",
+      "route": "continuity"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "a1",
+      "kind": "retainer_renewal_risk",
+      "severity": "high",
+      "text": "Renewal probability −18% vs. baseline after COO transition.",
+      "source": "Continuity signals · Mar 10 / Apr 09"
+    },
+    {
+      "id": "a2",
+      "kind": "exec_email_overdue",
+      "severity": "borderline",
+      "text": "CFO Apr 11 thread on TO scope · 8 days no reply.",
+      "source": "Inbox · CGS-CFO-0411"
+    },
+    {
+      "id": "a3",
+      "kind": "pre_rfp_signal",
+      "severity": "borderline",
+      "text": "Competitor pitched operating-model work Apr 15 — window opening.",
+      "source": "Meeting 19 · 0:47"
+    }
+  ],
+  "externalSignals": [
+    {
+      "id": "e1",
+      "t": "Apr 18",
+      "headline": "Major-sector capex plans re-priced after Q1 tariff reset",
+      "relevance": 0.82
+    },
+    {
+      "id": "e2",
+      "t": "Apr 16",
+      "headline": "Peer filer Globex announces new COO — second in 14 months",
+      "relevance": 0.91
+    },
+    {
+      "id": "e3",
+      "t": "Apr 12",
+      "headline": "CEO Halverson LinkedIn post on operating-model discipline — 3.2k engagement",
+      "relevance": 0.74
+    }
+  ],
+  "contextLoadSec": 28
+}

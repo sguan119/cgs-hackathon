@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGS Advisors Diagnostic F1–F5 Fixtures",
+  "description": "Schema for fixtures/diagnostic_fixtures/{f1,f2,f3,f4,f5}.json. Emitted by scripts/gen-diagnostic-fixtures.ts (phase-3-plan §4.2). Each file validates against the matching definition.",
+  "type": "object",
+  "oneOf": [
+    { "$ref": "#/definitions/F1" },
+    { "$ref": "#/definitions/F2" },
+    { "$ref": "#/definitions/F3" },
+    { "$ref": "#/definitions/F4" },
+    { "$ref": "#/definitions/F5" }
+  ],
+  "definitions": {
+    "F1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["headline", "signals", "generated_at", "model"],
+      "properties": {
+        "headline": { "type": "string", "minLength": 1 },
+        "signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_id", "quote", "observed_at"],
+            "properties": {
+              "source_id": { "type": "string", "minLength": 1 },
+              "quote": { "type": "string", "minLength": 1 },
+              "observed_at": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "F2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scores", "color_sequence", "generated_at", "model"],
+      "properties": {
+        "scores": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "external_sensing",
+            "internal_sensing",
+            "strategy_formulation",
+            "transformation_concept",
+            "strategic_transformation",
+            "strategic_innovation",
+            "strategy_governance"
+          ],
+          "properties": {
+            "external_sensing": { "type": "integer", "minimum": 1, "maximum": 7 },
+            "internal_sensing": { "type": "integer", "minimum": 1, "maximum": 7 },
+            "strategy_formulation": { "type": "integer", "minimum": 1, "maximum": 7 },
+            "transformation_concept": { "type": "integer", "minimum": 1, "maximum": 7 },
+            "strategic_transformation": { "type": "integer", "minimum": 1, "maximum": 7 },
+            "strategic_innovation": { "type": "integer", "minimum": 1, "maximum": 7 },
+            "strategy_governance": { "type": "integer", "minimum": 1, "maximum": 7 }
+          }
+        },
+        "color_sequence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "external_sensing",
+              "internal_sensing",
+              "strategy_formulation",
+              "transformation_concept",
+              "strategic_transformation",
+              "strategic_innovation",
+              "strategy_governance"
+            ]
+          }
+        },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "F3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hypotheses", "rationale", "generated_at", "model"],
+      "properties": {
+        "hypotheses": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/InertiaHypothesis" }
+        },
+        "rationale": { "type": "string", "minLength": 1 },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "F4": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["interventions", "generated_at", "model"],
+      "properties": {
+        "interventions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "body", "linked_hypotheses", "horizon"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "label": { "type": "string", "minLength": 1 },
+              "body": { "type": "string", "minLength": 1 },
+              "linked_hypotheses": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 }
+              },
+              "horizon": {
+                "type": "string",
+                "enum": ["first-mile", "horizon-2", "horizon-3"]
+              }
+            }
+          }
+        },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "F5": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questions", "generated_at", "model"],
+      "properties": {
+        "questions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "prompt", "target_stakeholder", "links_to_hypothesis"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "prompt": { "type": "string", "minLength": 1 },
+              "target_stakeholder": {
+                "type": "string",
+                "enum": ["ceo", "cfo", "coo", "cio", "board"]
+              },
+              "links_to_hypothesis": {
+                "anyOf": [
+                  { "type": "string", "minLength": 1 },
+                  { "type": "null" }
+                ]
+              }
+            }
+          }
+        },
+        "generated_at": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "InertiaHypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "label", "statement", "confidence", "evidence", "intervention_ids"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "enum": ["dominant_logic", "structural"] },
+        "label": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string", "minLength": 1 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_id", "quote"],
+            "properties": {
+              "source_id": { "type": "string", "minLength": 1 },
+              "quote": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "intervention_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

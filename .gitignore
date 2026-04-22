@@ -1,0 +1,23 @@
+# env
+.env.local
+.env*.local
+
+# node — pnpm is canonical; guard against stray npm lockfiles
+node_modules/
+.next/
+dist/
+out/
+package-lock.json
+
+# tauri
+src-tauri/target/
+
+# misc
+*.log
+.DS_Store
+*.tsbuildinfo
+
+# Phase 3 gen scripts — intermediate state (raw Claude dumps on parse failure)
+scripts/.gen-cache/
+scripts/.gen-cache/*.json
+scripts/.gen-cache/*.txt

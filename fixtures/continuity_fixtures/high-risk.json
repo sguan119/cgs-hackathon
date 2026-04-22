@@ -1,0 +1,8 @@
+{
+  "id": "high-risk",
+  "to": "D. Park <dpark@acme.example>",
+  "subject": "Acme — next steps",
+  "body": "Hi D. —\n\nFollowing up on our last Proposal. Would love to discuss expanding the deal and circle back on the Pipeline shortly.\n\nLet me know when you have time — I can pull the Customer list for the team review.",
+  "expected_verdict": "high-risk",
+  "notes": "Skeleton — trips blacklist (Proposal, Deal, Pipeline, Customer, would love to discuss, expanding the deal, circle back) + missing all three headers + no methodology tag per tech-design §2.8."
+}

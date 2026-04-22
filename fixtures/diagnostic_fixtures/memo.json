@@ -1,0 +1,13 @@
+{
+  "title": "Acme Industrial · CEO Memo",
+  "author": "Placeholder — Phase 3.2",
+  "date": "2026-04-21",
+  "sentences": [
+    {
+      "id": "m-placeholder",
+      "text": "Placeholder sentence — content owner fills in Phase 3.2.",
+      "dim": "strategic_innovation",
+      "conflict": false
+    }
+  ]
+}

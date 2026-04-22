@@ -1,0 +1,19 @@
+{
+  "screenshots": [
+    {
+      "id": "before_m1",
+      "label": "Before Meeting 1",
+      "imagePath": "/assets/thesis/before-m1.png",
+      "alt": "Thesis Memory snapshot before Meeting 1 — dominant logic, cited anchors, open contradictions",
+      "caption": "Baseline thesis · pre-Meeting 1"
+    },
+    {
+      "id": "before_m2",
+      "label": "Before Meeting 2",
+      "imagePath": "/assets/thesis/before-m2.png",
+      "alt": "Thesis Memory snapshot before Meeting 2 — delta highlighted in crimson",
+      "caption": "Updated thesis · diff highlighted in crimson"
+    }
+  ],
+  "defaultId": "before_m1"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "pass",
+  "to": "D. Park <dpark@acme.example>",
+  "subject": "Acme · weekly read",
+  "body": "Hi D. — quick weekly read before Tuesday.\n\nWhat We're Seeing\nThe ops team is absorbing the new cadence and the Strategic Innovation work has a clearer owner this week.\n\nQuick Pulse Check\nDominant Logic from 2019 still shapes how the business cases get built — flagging rather than pushing.\n\nPreliminary Read\nNo action needed before Tuesday. We will revisit after the board prep.",
+  "expected_verdict": "pass",
+  "notes": "Skeleton — content owner replaces with real Acme email (§2.8) pre-demo."
+}

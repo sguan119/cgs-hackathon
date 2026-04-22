@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGS Advisors Precedent Library",
+  "description": "Schema for fixtures/precedents.json. Locks the contract consumed by scripts/gen-precedent-embeddings.ts (Phase 3.1) and lib/retrieval/cosine.ts (Phase 2A). See architecture.md §3.1 and phase-0-plan §0.1.",
+  "type": "array",
+  "items": { "$ref": "#/definitions/Precedent" },
+  "definitions": {
+    "Precedent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "client_name",
+        "year",
+        "industry",
+        "summary",
+        "scene",
+        "key_quotes",
+        "cgs_tags",
+        "source_id",
+        "embedding",
+        "drilldown_layers"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable slug, e.g. 'globex-2018-cdo'.",
+          "minLength": 1
+        },
+        "client_name": {
+          "type": "string",
+          "description": "Virtual client name (e.g. 'Globex', 'Initech'). Never a real firm.",
+          "minLength": 1
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 2005,
+          "maximum": 2026
+        },
+        "industry": {
+          "type": "string",
+          "description": "Neutral industry tag. Never sector-specific per PRD §3.7 (no 'same-store sales', no 'production line', etc.).",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "description": "1-3 sentence surface blurb.",
+          "minLength": 1
+        },
+        "scene": {
+          "type": "string",
+          "description": "One-line scene label rendered on the Recall card subtitle.",
+          "minLength": 1
+        },
+        "key_quotes": {
+          "type": "array",
+          "description": "Verbatim quotes. At least 3 for the hero precedent, 1+ for others.",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "cgs_tags": {
+          "type": "array",
+          "description": "CGS methodology tags. MUST match lib/methodology/tags.ts whitelist (Phase 2C). Methodology misuse is a demo red line per PRD §3.5.3.",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "source_id": {
+          "type": "string",
+          "description": "Clickable provenance, e.g. 'Globex_Board_Memo_2018_p4'. Used by the Recall <source_id> tag (recall-stream-grammar.md).",
+          "minLength": 1
+        },
+        "embedding": {
+          "type": "array",
+          "description": "Empty array until Phase 3.1 gen-precedent-embeddings.ts backfills length-1536 vectors from text-embedding-3-small.",
+          "items": { "type": "number" }
+        },
+        "drilldown_layers": {
+          "type": "array",
+          "description": "1 to 3 drilldown layers. The hero (globex-2018-cdo) has exactly 3.",
+          "items": { "$ref": "#/definitions/DrilldownLayer" },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Opt-in bag for experimentation — keeps the core shape locked without blocking iteration.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "DrilldownLayer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["depth", "theme", "quotes", "key_facts"],
+      "properties": {
+        "depth": {
+          "type": "integer",
+          "enum": [1, 2, 3]
+        },
+        "theme": {
+          "type": "string",
+          "description": "Canonical values: 'decision' | 'transition' | 'resistance' | 'rebound'. Free-form strings permitted for future themes.",
+          "minLength": 1
+        },
+        "quotes": {
+          "type": "array",
+          "description": "Verbatim only — Claude prompt is wired to 'quote source, don't paraphrase' (risk R2).",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "key_facts": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/KeyFact" },
+          "minItems": 1
+        }
+      }
+    },
+    "KeyFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "value": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

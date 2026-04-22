@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGS Advisors Thesis Memory Fixture",
+  "description": "Schema for fixtures/thesis_fixtures/thesis.json (Phase 4.6). Two screenshots, ordered [m1, m2].",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["screenshots", "defaultId"],
+  "properties": {
+    "screenshots": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "imagePath", "alt"],
+        "properties": {
+          "id": { "type": "string", "enum": ["before_m1", "before_m2"] },
+          "label": {
+            "type": "string",
+            "enum": ["Before Meeting 1", "Before Meeting 2"]
+          },
+          "imagePath": { "type": "string", "minLength": 1 },
+          "alt": { "type": "string", "minLength": 1 },
+          "caption": { "type": "string" }
+        }
+      }
+    },
+    "defaultId": { "type": "string", "enum": ["before_m1", "before_m2"] }
+  }
+}

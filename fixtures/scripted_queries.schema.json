@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CGS Advisors Scripted Queries",
+  "description": "Schema for fixtures/scripted_queries.json (Phase 2A §3.1). Empty array is valid — content owner fills entries per impl-plan §3.1.",
+  "type": "array",
+  "items": { "$ref": "#/definitions/ScriptedQuery" },
+  "definitions": {
+    "ScriptedQuery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "query", "embedding", "category"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "query": { "type": "string", "minLength": 1 },
+        "embedding": {
+          "type": "array",
+          "description": "Empty array until backfilled by the impl-plan §3.1 gen script.",
+          "items": { "type": "number" }
+        },
+        "expected_precedent_ids": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "category": {
+          "type": "string",
+          "enum": ["first-hit", "follow-up", "fallback-trigger", "safety-net"]
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

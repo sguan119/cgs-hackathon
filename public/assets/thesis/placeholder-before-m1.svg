@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="Thesis Memory placeholder — Before Meeting 1">
+  <defs>
+    <style>
+      .bg { fill: #FAF8F3; }
+      .rule { stroke: #D7D0BF; stroke-width: 1; }
+      .title { font: 600 20px 'IBM Plex Serif', Georgia, serif; fill: #0F1B2D; }
+      .kicker { font: 500 10px 'IBM Plex Mono', monospace; fill: #555E6E; letter-spacing: 0.08em; }
+      .body { font: 400 12px 'IBM Plex Sans', system-ui, sans-serif; fill: #121821; }
+      .col-h { font: 600 11px 'IBM Plex Mono', monospace; fill: #0F1B2D; letter-spacing: 0.06em; }
+    </style>
+  </defs>
+  <rect class="bg" width="800" height="450" />
+  <rect x="16" y="16" width="768" height="418" fill="none" class="rule" />
+  <text x="32" y="48" class="kicker">THESIS MEMORY · SNAPSHOT</text>
+  <text x="32" y="82" class="title">Before Meeting 1</text>
+  <line x1="32" y1="100" x2="768" y2="100" class="rule" />
+
+  <text x="48" y="132" class="col-h">DOMINANT LOGIC</text>
+  <text x="48" y="158" class="body">Transformation = cost program</text>
+  <text x="48" y="178" class="body">Cadence framed as cost-discipline pivot</text>
+
+  <line x1="280" y1="110" x2="280" y2="420" class="rule" />
+
+  <text x="296" y="132" class="col-h">CITED ANCHORS</text>
+  <text x="296" y="158" class="body">• Globex 2018 (governance)</text>
+
+  <line x1="528" y1="110" x2="528" y2="420" class="rule" />
+
+  <text x="544" y="132" class="col-h">OPEN CONTRADICTIONS</text>
+  <text x="544" y="158" class="body">• Innovation reporting line</text>
+  <text x="544" y="178" class="body">• Transformation Office permanence?</text>
+
+  <text x="32" y="414" class="kicker">PLACEHOLDER · CONTENT-OWNER PNG REPLACES THIS SVG</text>
+</svg>

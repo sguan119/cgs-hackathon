@@ -1,0 +1,38 @@
+[
+  {
+    "id": "globex-2018-cdo",
+    "client_name": "Globex",
+    "year": 2018,
+    "industry": "industrial-neutral",
+    "summary": "TODO: 1-3 sentence hook — content owner fills per impl-plan §3.A",
+    "scene": "CDO reporting-line restructure",
+    "key_quotes": [
+      "TODO: verbatim quote 1",
+      "TODO: verbatim quote 2",
+      "TODO: verbatim quote 3"
+    ],
+    "cgs_tags": ["Structural Inertia", "Strategy Governance & Communications"],
+    "source_id": "Globex_Board_Memo_2018_p4",
+    "embedding": [],
+    "drilldown_layers": [
+      {
+        "depth": 1,
+        "theme": "decision",
+        "quotes": ["TODO: verbatim quote"],
+        "key_facts": [{ "label": "Final reporting line", "value": "CDO \u2192 CEO" }]
+      },
+      {
+        "depth": 2,
+        "theme": "transition",
+        "quotes": ["TODO: verbatim quote"],
+        "key_facts": [{ "label": "Transition duration", "value": "7 months" }]
+      },
+      {
+        "depth": 3,
+        "theme": "resistance",
+        "quotes": ["TODO: verbatim quote"],
+        "key_facts": [{ "label": "Primary friction", "value": "COO org" }]
+      }
+    ]
+  }
+]

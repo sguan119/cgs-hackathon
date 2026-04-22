@@ -1,0 +1,57 @@
+[
+  {
+    "id": "esc1",
+    "source_reply_id": "r1",
+    "friction_type": "structural",
+    "confidence": 0.86,
+    "baseline": "Strategic Innovation reports through COO; horizon-2 roadmap held at Nov 2025 close-out.",
+    "observed": "Digital folded under Ops remit; Innovation stack described as open for re-architecture.",
+    "next_actions": [
+      {
+        "id": "na1",
+        "title": "Schedule 30-min Inertia Removal check-in",
+        "archetype": "Relational",
+        "effort": "Low",
+        "why": "Three prior clients who restructured Innovation under Ops saw baseline shift within 60 days of the change; early re-grounding preserves trust."
+      },
+      {
+        "id": "na2",
+        "title": "Deliver Ring-Fenced Budget precedent memo",
+        "archetype": "Content",
+        "effort": "Medium",
+        "why": "CEO explicitly flagged rethinking the stack — anchor the conversation in CGS frame before Jul planning cycle."
+      },
+      {
+        "id": "na3",
+        "title": "Hold — wait for next earnings call signal",
+        "archetype": "Passive",
+        "effort": "None",
+        "why": "Signal still forming. Risk: competitor fills advisory vacuum during the 8-week window."
+      }
+    ]
+  },
+  {
+    "id": "esc2",
+    "source_reply_id": "r2",
+    "friction_type": "dominant_logic",
+    "confidence": 0.72,
+    "baseline": "Transformation Office scope accepted at Nov 2025 close-out; July planning cycle assumed stable.",
+    "observed": "CFO reframes timing around Q1 tariff capex reprice — cost-cycle logic over capability cycle.",
+    "next_actions": [
+      {
+        "id": "na4",
+        "title": "Send Globex 2018 Dual-P&L brief",
+        "archetype": "Content",
+        "effort": "Low",
+        "why": "Counters cost-cycle framing with a precedent showing capability-cycle outcomes."
+      },
+      {
+        "id": "na5",
+        "title": "Hold — wait for July planning cycle",
+        "archetype": "Passive",
+        "effort": "None",
+        "why": "CFO explicitly asked to defer; pushing now risks relational friction."
+      }
+    ]
+  }
+]
