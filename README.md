@@ -29,15 +29,30 @@ Diagnostic F1–F5) is fixture-driven fake surface around those real features.
 
 ## Run
 
+One command boots the full desktop app (Next.js + Tauri native shell):
+
 ```bash
 pnpm install
-cp .env.local.example .env.local    # fill in ANTHROPIC_API_KEY + OPENAI_API_KEY
-pnpm dev                             # Next.js dev server
-cargo tauri dev                      # Tauri shell (separate terminal)
+pnpm dev
 ```
 
-Pre-flight (`/preflight`) will ping both APIs; red/yellow/green indicates
-which keys are valid.
+`pnpm dev` runs `scripts/launch.mjs`, which:
+
+- prepends `~/.cargo/bin` to PATH so cargo is reachable from any shell
+- auto-seeds `.env.local` from `.env.local.example` on first run
+- frees port 3000 if something is already listening
+- hands off to `tauri dev` (Next + Rust native window)
+
+Prereqs: Node ≥ 20, pnpm 10, Rust toolchain (https://rustup.rs), and on
+Windows the MSVC C++ Build Tools. Fill in real `ANTHROPIC_API_KEY` /
+`OPENAI_API_KEY` in `.env.local` to enable live Claude / OpenAI calls —
+pre-flight (`/preflight`) shows a red/yellow/green traffic light per key.
+
+Web-only (no native shell, useful for quick UI checks without Rust):
+
+```bash
+pnpm dev:web                         # Next.js on :3000 in a browser tab
+```
 
 ## Test
 
@@ -101,6 +116,7 @@ fixtures/
   diagnostic_fixtures/               # F1..F5 outputs (Claude-generated)
   dashboard_fixtures/ datahub_fixtures/ thesis_fixtures/
 scripts/
+  launch.mjs                         # one-command desktop launcher (pnpm dev)
   gen-*.ts check-fixture-mtimes.ts test-phase-*.js
   lib/                               # shared helpers (env, args, schema, claude-call)
 docs/

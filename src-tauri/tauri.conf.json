@@ -6,7 +6,7 @@
   "build": {
     "frontendDist": "../out",
     "devUrl": "http://localhost:3000",
-    "beforeDevCommand": "pnpm dev",
+    "beforeDevCommand": "pnpm dev:web",
     "beforeBuildCommand": "pnpm build"
   },
   "app": {
@@ -41,10 +41,7 @@
       "csp": null
     }
   },
-  "plugins": {
-    "store": {},
-    "global-shortcut": {}
-  },
+  "plugins": {},
   "bundle": {
     "active": true,
     "targets": ["msi", "nsis"],
